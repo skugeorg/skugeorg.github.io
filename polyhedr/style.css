@@ -1,0 +1,17 @@
+#tweakpane {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 280px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+}
+
+#tweakpane .tp-dfv {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+}
