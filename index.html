@@ -1,403 +1,429 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Math & Space</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  body {
-    min-height: 100vh;
-    font-family: 'Space Grotesk', sans-serif;
-    color: #fff;
-    background: #05050f;
-    overflow-x: hidden;
-    position: relative;
-  }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a1a;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            overflow: hidden;
+        }
 
-  /* Animated background gradient */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(circle at 20% 30%, rgba(120, 50, 200, 0.4) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(30, 120, 220, 0.35) 0%, transparent 50%),
-      radial-gradient(circle at 50% 90%, rgba(230, 60, 160, 0.3) 0%, transparent 50%),
-      radial-gradient(circle at 90% 20%, rgba(50, 220, 200, 0.25) 0%, transparent 50%);
-    animation: bgShift 20s ease-in-out infinite alternate;
-    z-index: 0;
-  }
+        /* Animated background */
+        .bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
 
-  @keyframes bgShift {
-    0% { transform: scale(1) rotate(0deg); }
-    100% { transform: scale(1.2) rotate(15deg); }
-  }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
 
-  /* Stars */
-  .stars {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-  }
-  .star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    animation: twinkle 3s ease-in-out infinite;
-  }
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.2; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1.2); }
-  }
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #6366f1, #8b5cf6);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
 
-  /* Floating geometric shapes */
-  .shape {
-    position: fixed;
-    opacity: 0.15;
-    pointer-events: none;
-    z-index: 1;
-    animation: float 15s ease-in-out infinite;
-  }
-  @keyframes float {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(30px, -40px) rotate(120deg); }
-    66% { transform: translate(-20px, 30px) rotate(240deg); }
-  }
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #06b6d4, #0ea5e9);
+            bottom: -80px;
+            right: -80px;
+            animation-delay: -5s;
+        }
 
-  /* Main container */
-  .container {
-    position: relative;
-    z-index: 10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-  }
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #f43f5e, #ec4899);
+            top: 50%;
+            left: 60%;
+            animation-delay: -10s;
+        }
 
-  /* Header */
-  header {
-    text-align: center;
-    margin-bottom: 80px;
-  }
+        .orb-4 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #10b981, #34d399);
+            bottom: 30%;
+            left: 10%;
+            animation-delay: -15s;
+        }
 
-  h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #fff 0%, #a5b4fc 40%, #f0abfc 70%, #67e8f9 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 16px;
-    animation: glow 4s ease-in-out infinite alternate;
-  }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(80px, -60px) scale(1.1); }
+            50% { transform: translate(-40px, 80px) scale(0.9); }
+            75% { transform: translate(60px, 40px) scale(1.05); }
+        }
 
-  @keyframes glow {
-    from { filter: drop-shadow(0 0 20px rgba(165, 180, 252, 0.3)); }
-    to { filter: drop-shadow(0 0 35px rgba(240, 171, 252, 0.5)); }
-  }
+        /* Main content */
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px 20px;
+        }
 
-  .subtitle {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    font-family: 'JetBrains Mono', monospace;
-  }
+        .title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #67e8f9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+            animation: fadeInDown 0.8s ease-out;
+        }
 
-  .subtitle::before, .subtitle::after {
-    content: '—';
-    margin: 0 12px;
-    opacity: 0.5;
-  }
+        .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 60px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: fadeInDown 0.8s ease-out 0.2s both;
+        }
 
-  /* Cards grid */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    max-width: 1200px;
-    width: 100%;
-  }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-  /* Card */
-  .card {
-    position: relative;
-    padding: 2px;
-    border-radius: 24px;
-    text-decoration: none;
-    color: white;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
-    cursor: pointer;
-    display: block;
-    overflow: hidden;
-  }
+        /* Cards grid */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            max-width: 1100px;
+            padding: 0 20px;
+        }
 
-  .card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 24px;
-    padding: 2px;
-    background: linear-gradient(135deg, var(--c1), var(--c2), var(--c3));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0.6;
-    transition: opacity 0.4s ease;
-  }
+        .card {
+            position: relative;
+            text-decoration: none;
+            border-radius: 20px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out both;
+        }
 
-  .card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 60px -10px var(--c1);
-  }
+        .card:nth-child(1) { animation-delay: 0.3s; }
+        .card:nth-child(2) { animation-delay: 0.45s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+        .card:nth-child(4) { animation-delay: 0.75s; }
 
-  .card:hover::before {
-    opacity: 1;
-  }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-  .card-inner {
-    background: rgba(15, 15, 30, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 22px;
-    padding: 36px 28px;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-  }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
 
-  .card-inner::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, var(--c1) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    pointer-events: none;
-  }
+        .card:hover::before {
+            opacity: 1;
+        }
 
-  .card:hover .card-inner::before {
-    opacity: 0.15;
-  }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(99, 102, 241, 0.1);
+        }
 
-  .icon {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--c1), var(--c2));
-    border-radius: 18px;
-    box-shadow: 0 8px 24px -8px var(--c1);
-    transition: transform 0.4s ease;
-  }
+        /* Glow effect on hover */
+        .card .glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 20px;
+            pointer-events: none;
+        }
 
-  .card:hover .icon {
-    transform: rotate(-8deg) scale(1.1);
-  }
+        .card:hover .glow {
+            opacity: 1;
+        }
 
-  .icon svg {
-    width: 32px;
-    height: 32px;
-    color: white;
-  }
+        .card:nth-child(1) .glow {
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15), transparent 70%);
+        }
+        .card:nth-child(2) .glow {
+            background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.15), transparent 70%);
+        }
+        .card:nth-child(3) .glow {
+            background: radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.15), transparent 70%);
+        }
+        .card:nth-child(4) .glow {
+            background: radial-gradient(circle at 50% 50%, rgba(234, 179, 8, 0.15), transparent 70%);
+        }
 
-  .card-title {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    letter-spacing: -0.01em;
-  }
+        /* Icon */
+        .icon-wrapper {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+        }
 
-  .card-desc {
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    font-weight: 300;
-  }
+        .card:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+        }
 
-  .arrow {
-    margin-top: 24px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--c1);
-    font-weight: 500;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    transition: gap 0.3s ease;
-  }
+        .card:nth-child(1) .icon-wrapper {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+        }
+        .card:nth-child(2) .icon-wrapper {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(52, 211, 153, 0.2));
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+        .card:nth-child(3) .icon-wrapper {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(236, 72, 153, 0.2));
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.2);
+        }
+        .card:nth-child(4) .icon-wrapper {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(250, 204, 21, 0.2));
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.2);
+        }
 
-  .card:hover .arrow {
-    gap: 14px;
-  }
+        .icon-wrapper svg {
+            width: 36px;
+            height: 36px;
+        }
 
-  /* Card variations */
-  .card.fractal { --c1: #a855f7; --c2: #ec4899; --c3: #8b5cf6; }
-  .card.polyhedr { --c1: #3b82f6; --c2: #06b6d4; --c3: #6366f1; }
-  .card.messenger { --c1: #10b981; --c2: #14b8a6; --c3: #06b6d4; }
-  .card.fourd { --c1: #f59e0b; --c2: #ef4444; --c3: #ec4899; }
+        .card:nth-child(1) .icon-wrapper svg { stroke: #a5b4fc; }
+        .card:nth-child(2) .icon-wrapper svg { stroke: #6ee7b7; }
+        .card:nth-child(3) .icon-wrapper svg { stroke: #fda4af; }
+        .card:nth-child(4) .icon-wrapper svg { stroke: #fde68a; }
 
-  /* Footer */
-  footer {
-    position: relative;
-    z-index: 10;
-    margin-top: 80px;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 0.85rem;
-    font-family: 'JetBrains Mono', monospace;
-  }
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
 
-  /* Entry animation */
-  .card {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: slideUp 0.8s ease forwards;
-  }
-  .card:nth-child(1) { animation-delay: 0.1s; }
-  .card:nth-child(2) { animation-delay: 0.2s; }
-  .card:nth-child(3) { animation-delay: 0.3s; }
-  .card:nth-child(4) { animation-delay: 0.4s; }
+        .card-desc {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.5;
+        }
 
-  @keyframes slideUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
+        /* Arrow */
+        .arrow {
+            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            font-size: 1.2rem;
+        }
 
-  @media (max-width: 600px) {
-    header { margin-bottom: 50px; }
-    .card-inner { padding: 28px 22px; }
-    .cards { gap: 18px; }
-  }
-</style>
+        .card:hover .arrow {
+            color: rgba(255, 255, 255, 0.7);
+            transform: translateX(5px);
+        }
+
+        /* Stars / particles */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .title {
+                font-size: 2.2rem;
+            }
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <!-- Animated background -->
+    <div class="bg-canvas">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
 
-<div class="stars" id="stars"></div>
+    <!-- Stars -->
+    <div class="stars" id="stars"></div>
 
-<!-- Floating geometric shapes -->
-<svg class="shape" style="top:10%;left:5%;width:80px;height:80px" viewBox="0 0 100 100"><polygon points="50,10 90,90 10,90" fill="none" stroke="#a855f7" stroke-width="2"/></svg>
-<svg class="shape" style="top:70%;right:8%;width:100px;height:100px;animation-delay:-5s" viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" fill="none" stroke="#3b82f6" stroke-width="2" transform="rotate(45 50 50)"/></svg>
-<svg class="shape" style="top:40%;right:15%;width:60px;height:60px;animation-delay:-10s" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#10b981" stroke-width="2"/></svg>
-<svg class="shape" style="bottom:15%;left:12%;width:90px;height:90px;animation-delay:-7s" viewBox="0 0 100 100"><polygon points="50,10 90,40 75,90 25,90 10,40" fill="none" stroke="#f59e0b" stroke-width="2"/></svg>
+    <!-- Content -->
+    <div class="container">
+        <h1 class="title">My Projects</h1>
+        <p class="subtitle">Explore the collection</p>
 
-<div class="container">
-  <header>
-    <h1>Explore the Dimensions</h1>
-    <p class="subtitle">Mathematics · Geometry · Infinity</p>
-  </header>
+        <div class="cards">
+            <!-- Fractal -->
+            <a href="./fractal/fractal.html" class="card">
+                <div class="glow"></div>
+                <div class="icon-wrapper">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                    </svg>
+                </div>
+                <div class="card-title">Fractal</div>
+                <div class="card-desc">Infinite mathematical beauty in recursive patterns</div>
+                <div class="arrow">→</div>
+            </a>
 
-  <div class="cards">
+            <!-- Polyhedr -->
+            <a href="./polyhedr/polyhedr.html" class="card">
+                <div class="glow"></div>
+                <div class="icon-wrapper">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                    </svg>
+                </div>
+                <div class="card-title">Polyhedr</div>
+                <div class="card-desc">Geometric solids and their fascinating properties</div>
+                <div class="arrow">→</div>
+            </a>
 
-    <a href="./fractal/fractal.html" class="card fractal">
-      <div class="card-inner">
-        <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2L2 22h20L12 2z"/>
-            <path d="M12 2L7 12h10L12 2z"/>
-            <path d="M7 12l-5 10"/>
-            <path d="M17 12l5 10"/>
-          </svg>
+            <!-- Messenger -->
+            <a href="http://zov-messenger.ru" class="card">
+                <div class="glow"></div>
+                <div class="icon-wrapper">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+                    </svg>
+                </div>
+                <div class="card-title">Messenger</div>
+                <div class="card-desc">Connect and communicate in real-time</div>
+                <div class="arrow">→</div>
+            </a>
+
+            <!-- 4D -->
+            <a href="./4d/index.html" class="card">
+                <div class="glow"></div>
+                <div class="icon-wrapper">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                    </svg>
+                </div>
+                <div class="card-title">4D</div>
+                <div class="card-desc">Visualize the fourth dimension and beyond</div>
+                <div class="arrow">→</div>
+            </a>
         </div>
-        <h2 class="card-title">Fractal</h2>
-        <p class="card-desc">Infinite self-similar patterns — where mathematics meets beauty at every scale.</p>
-        <span class="arrow">Enter <span>→</span></span>
-      </div>
-    </a>
+    </div>
 
-    <a href="./polyhedr/polyhedr.html" class="card polyhedr">
-      <div class="card-inner">
-        <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2l9 5v10l-9 5-9-5V7l9-5z"/>
-            <path d="M12 2v20"/>
-            <path d="M21 7l-9 5-9-5"/>
-            <path d="M21 17l-9-5-9 5"/>
-          </svg>
-        </div>
-        <h2 class="card-title">Polyhedr</h2>
-        <p class="card-desc">Platonic solids, Archimedean forms and the elegant geometry of three dimensions.</p>
-        <span class="arrow">Enter <span>→</span></span>
-      </div>
-    </a>
-
-    <a href="http://zov-messenger.ru" class="card messenger">
-      <div class="card-inner">
-        <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            <circle cx="9" cy="10" r="1" fill="currentColor"/>
-            <circle cx="12" cy="10" r="1" fill="currentColor"/>
-            <circle cx="15" cy="10" r="1" fill="currentColor"/>
-          </svg>
-        </div>
-        <h2 class="card-title">Messenger</h2>
-        <p class="card-desc">Connect with others instantly. Fast, secure and beautifully simple communication.</p>
-        <span class="arrow">Enter <span>→</span></span>
-      </div>
-    </a>
-
-    <a href="./4d/index.html" class="card fourd">
-      <div class="card-inner">
-        <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 7l3-3h12l3 3v10l-3 3H6l-3-3V7z"/>
-            <path d="M7 10l2-2h6l2 2v4l-2 2H9l-2-2v-4z"/>
-            <path d="M3 7l4 3"/>
-            <path d="M21 7l-4 3"/>
-            <path d="M3 17l4-3"/>
-            <path d="M21 17l-4-3"/>
-          </svg>
-        </div>
-        <h2 class="card-title">4D</h2>
-        <p class="card-desc">Tesseracts, hypercubes and the mind-bending world of the fourth spatial dimension.</p>
-        <span class="arrow">Enter <span>→</span></span>
-      </div>
-    </a>
-
-  </div>
-
-  <footer>© 2026 · Math & Space</footer>
-</div>
-
-<script>
-  // Generate stars
-  const starsContainer = document.getElementById('stars');
-  for (let i = 0; i < 80; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    const size = Math.random() * 2 + 1;
-    star.style.width = size + 'px';
-    star.style.height = size + 'px';
-    star.style.left = Math.random() * 100 + '%';
-    star.style.top = Math.random() * 100 + '%';
-    star.style.animationDelay = Math.random() * 3 + 's';
-    star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-    starsContainer.appendChild(star);
-  }
-
-  // Subtle parallax on mouse move
-  document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    document.querySelectorAll('.shape').forEach((shape, i) => {
-      const factor = (i + 1) * 0.5;
-      shape.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
-    });
-  });
-</script>
-
+    <script>
+        // Generate random stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 3) + 's';
+            star.style.width = (1 + Math.random() * 2) + 'px';
+            star.style.height = star.style.width;
+            starsContainer.appendChild(star);
+        }
+    </script>
 </body>
+
 </html>
